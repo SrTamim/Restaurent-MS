@@ -1,0 +1,50 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    margin-top: 10px;
+}
+.heading-table{
+    background-color: #F900BF;
+    position: sticky;
+}
+.heading-table p{
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-size: 20px;
+}
+table{
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+th{
+    background-color: greenyellow;
+    
+}
+td{
+    text-align: center;
+}
+ table tr:hover{
+    background-color: #02FE73;
+}
+.info{
+    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.submit{
+    width: 200px;
+    height: 30px;
+    background-color: rgb(22, 238, 231);
+    color: rgb(0, 0, 0);
+}
+.submit:hover{
+    background-color: rgb(36, 255, 251);
+    border: 2px solid rgb(0, 167, 200);
+}
+span{
+    color: red;
+}

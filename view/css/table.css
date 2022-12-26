@@ -1,0 +1,48 @@
+.heading-table{
+    background-color: #00ecf9;
+    position: sticky;
+}
+.heading-table h1{
+    color: rgb(0, 0, 0);
+    padding: 10px;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    margin-top: 10px;
+}
+table{
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+th{
+    background-color: greenyellow;
+    
+}
+td{
+    text-align: center;
+}
+ table tr:hover{
+    background-color: #02FE73;
+}
+
+.home1{
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  padding:2rem 10rem;
+}
+
+.home1 .video video{
+  position: absolute;
+  top:0; left:0;
+  height:100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}

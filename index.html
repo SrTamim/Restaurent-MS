@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./view/css/style.css">
+	<script src="./view/js/login.js"></script>
+
+	<title>Login </title>
+</head>
+<body>
+	<div class="container">
+		<form name="Form" class="login-email" action="controller/loginAction.php" method = "POST" name="form" onsubmit="return valid();">
+			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
+
+			<div class="input-group">
+				<input type="text" placeholder="User Name" name="uname" id="userName" > <br>
+				<div class="error" id="userNameError"></div>
+				<span id="userNameError"></span> <br><br>
+			</div>
+
+			<div class="input-group">
+				<input type="password" placeholder="Password" name="pass" maxlength="8" id="password" >
+				<div class="error" id="passwordError"></div>
+				<span id="passwordError"></span> <br><br>
+			</div>
+
+			<div class="input-group">
+				<input type="submit" value="Login" name="login" class="btn">
+			</div>
+			<p class="login-register-text">Don't have an account? <a href="./view/register.php">Register Here</a>.</p>
+		</form>
+	</div>
+</body>
+</html>
