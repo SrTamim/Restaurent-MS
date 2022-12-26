@@ -1,0 +1,244 @@
+CREATE TABLE "UINFORMATION" ("NAME" VARCHAR2(50),"UNAME" VARCHAR2(50),"EMAIL" VARCHAR2(50),"PASS"  NUMBER(15),"GENDER" VARCHAR2(50))
+
+CREATE TABLE "RESTAURANT"
+ ( "R_ID" NUMBER(3,0),
+"R_NAME" VARCHAR2(50),
+"R_PHONE" NUMBER(12,0),
+"R_ADDRESS" VARCHAR2(100),
+"R_ZIPCODE" NUMBER(5,0),
+CONSTRAINT "PK_RID" PRIMARY KEY ("R_ID") ENABLE
+ )
+
+CREATE TABLE "MANAGER"
+ ( "M_ID" NUMBER(3,0),
+"M_NAME" VARCHAR2(50),
+"M_ADDRESS" VARCHAR2(50),
+"M_PHONE" NUMBER(11,0),
+"M_ZIPCODE" NUMBER(5,0),
+"R_ID" NUMBER(3,0),
+CONSTRAINT "PK_MID" PRIMARY KEY ("M_ID") ENABLE,
+CONSTRAINT "FK_RID_MANAGER" FOREIGN KEY ("R_ID")
+ REFERENCES "RESTAURANT" ("R_ID") ENABLE
+ )
+ 
+CREATE TABLE "WAITER"
+ ( "W_ID" NUMBER(3,0),
+"W_NAME" VARCHAR2(50),
+"W_PHONE" NUMBER(12,0),
+"W_ADDRESS" VARCHAR2(100),
+"SAL" NUMBER(12,0),
+"R_ID" NUMBER(3,0),
+"M_ID" NUMBER(3,0),
+CONSTRAINT "PK_WID" PRIMARY KEY ("W_ID") ENABLE,
+CONSTRAINT "FK_RID_WAITER" FOREIGN KEY ("R_ID")
+ REFERENCES "RESTAURANT" ("R_ID") ENABLE,
+CONSTRAINT "FK_MID_WAITER" FOREIGN KEY ("M_ID")
+ REFERENCES "MANAGER" ("M_ID") ENABLE
+ )
+ 
+ CREATE TABLE "CASHIER"
+ ( "CA_ID" NUMBER(3,0),
+"CA_NAME" VARCHAR2(50),
+"CA_PHONE" NUMBER(12,0),
+"CA_ADDRESS" VARCHAR2(100),
+"R_ID" NUMBER(3,0),
+CONSTRAINT "PK_CAID" PRIMARY KEY ("CA_ID") ENABLE,
+CONSTRAINT "FK_RID_CASHIER" FOREIGN KEY ("R_ID")
+ REFERENCES "MANAGER" ("M_ID") ENABLE
+ )
+ 
+ CREATE TABLE "FOOD_ITEM"
+ ( "I_ID" NUMBER(3,0),
+"I_NAME" VARCHAR2(50),
+"I_AMOUNT" NUMBER(5,0),
+"I_QUANTITY" NUMBER(5,0),
+"I_DESCRIPITION" VARCHAR2(200),
+CONSTRAINT "PK_IID" PRIMARY KEY ("I_ID") ENABLE
+ )
+
+CREATE TABLE "BRANCH"
+ ( "B_ID" NUMBER(3,0),
+"B_NAME" VARCHAR2(50),
+"M_ID" NUMBER(3,0),
+"R_ID" NUMBER(3,0), 
+CONSTRAINT "PK_BID" PRIMARY KEY ("B_ID") ENABLE,
+CONSTRAINT "FK_MID_BRANCH" FOREIGN KEY ("M_ID")
+ REFERENCES "MANAGER" ("M_ID") ENABLE,
+CONSTRAINT "FK_RID_BRANCH" FOREIGN KEY ("R_ID")
+ REFERENCES "RESTAURANT" ("R_ID") ENABLE
+)
+
+CREATE TABLE "CUSTOMER"
+( "CU_ID" NUMBER(3,0),
+"CU_NAME" VARCHAR2(50),
+"CU_PHONE" NUMBER(12,0),
+"I_ID" NUMBER(3,0),
+"R_ID" NUMBER(3,0),
+CONSTRAINT "PK_CUD" PRIMARY KEY ("CU_ID") ENABLE,
+CONSTRAINT "FK_IID_CUSTOMER" FOREIGN KEY ("I_ID")
+ REFERENCES "FOOD_ITEM" ("I_ID") ENABLE,
+CONSTRAINT "FK_RID_CUSTOMER" FOREIGN KEY ("R_ID")
+ REFERENCES "RESTAURANT" ("R_ID") ENABLE
+ )
+
+INSERT INTO RESTAURANT VALUES ('1','SHUVO', '01779174188', 'UTTORA', '1214');
+INSERT INTO RESTAURANT VALUES ('2','RABBY', '01779175178', 'BONANI', '1211');
+INSERT INTO RESTAURANT VALUES ('3','FAHIM', '01779174148', 'SAVAR', '1212');
+INSERT INTO RESTAURANT VALUES ('4','HASAN', '01779174128', 'GULSHAN', '1213');
+INSERT INTO RESTAURANT VALUES ('5','tamim', '01779174128', 'mirpur', '1210');
+
+INSERT INTO manager (m_id, m_name, m_address, m_phone, m_zipcode, R_id) VALUES (1, 'Sadi', 'Mymensingh', '01817754323', 2200, 1);
+INSERT INTO manager (m_id, m_name, m_address, m_phone, m_zipcode, R_id) VALUES (2, 'Siyam', 'Sherpur', '01717772322', 2100, 2); 
+INSERT INTO manager (m_id, m_name, m_address, m_phone, m_zipcode, R_id) VALUES (3, 'Mishu', 'Dhaka', '01774432129', 1205, 3);
+INSERT INTO manager (m_id, m_name, m_address, m_phone, m_zipcode, R_id) VALUES (4, 'Opi', 'Chittagong', '01997774389', 4000, 4 );
+INSERT INTO manager (m_id, m_name, m_address, m_phone, m_zipcode, R_id) VALUES (5, 'Fahim', 'Sylhet', '017023754494', 3100, 1);
+
+INSERT INTO waiter (w_id, w_name, w_phone, w_address, sal, R_id, m_id) VALUES (1, 'David', '01717653321', 'Mymensingh', '5000', 1, 1);
+INSERT INTO waiter (w_id, w_name, w_phone, w_address, sal, R_id, m_id) VALUES (2, 'Joy', '01917672331', 'Sherpur', '2000',2, 2);  
+INSERT INTO waiter (w_id, w_name, w_phone, w_address, sal, R_id, m_id) VALUES (3, 'Zaman', '01665433111', 'Dhaka', '3000',3, 3);
+INSERT INTO waiter (w_id, w_name, w_phone, w_address, sal, R_id, m_id) VALUES (4, 'Lipu', '01817664339', 'Chittagong', '4000',4, 4);
+INSERT INTO waiter (w_id, w_name, w_phone, w_address, sal, R_id, m_id) VALUES (5, 'Rubel', '01517654363', 'Sylhet', '6000',2, 2);
+
+INSERT INTO cashier (ca_id, ca_name, ca_phone, ca_address, R_id) VALUES (1, 'Tanmoy', '01717755322', 'Mymensingh', 1);
+INSERT INTO cashier (ca_id, ca_name, ca_phone, ca_address, R_id) VALUES (2, 'Shihab', '01917772553', 'Sherpur', 2);  
+INSERT INTO cashier (ca_id, ca_name, ca_phone, ca_address, R_id) VALUES (3, 'Akib', '01664432168', 'Dhaka', 3);
+INSERT INTO cashier (ca_id, ca_name, ca_phone, ca_address, R_id) VALUES (4, 'Sadman', '01983774389', 'Chittagong', 4);
+INSERT INTO cashier (ca_id, ca_name, ca_phone, ca_address, R_id) VALUES (5, 'Kamal', '01617759999', 'Sylhet', 3);
+
+INSERT INTO food_item (i_id, i_name, i_amount, i_quantity, I_DESCRIPITION) VALUES (1, 'Beef Burger', 180, 120, 'Nice');
+INSERT INTO food_item (i_id, i_name, i_amount, i_quantity, I_DESCRIPITION) VALUES (2, 'Egg Sandwich', 100, 110, 'Good'); 
+INSERT INTO food_item (i_id, i_name, i_amount, i_quantity, I_DESCRIPITION) VALUES (3, 'Mutton Biriyani', 250, 100, 'Good');
+INSERT INTO food_item (i_id, i_name, i_amount, i_quantity, I_DESCRIPITION) VALUES (4, 'Coca-Cola', 30, 200, 'Good');
+INSERT INTO food_item (i_id, i_name, i_amount, i_quantity, I_DESCRIPITION) VALUES (5, 'Cappuccino Coffee', 120, 150, 'Excellent');
+
+INSERT INTO branch (B_ID, B_NAME, M_ID, R_id) VALUES (1, 'RANA', 1, 1);
+INSERT INTO branch (B_ID, B_NAME, M_ID, R_id) VALUES (2, 'MANA', 2, 2);  
+INSERT INTO branch (B_ID, B_NAME, M_ID, R_id) VALUES (3, 'KALA', 3, 3);
+INSERT INTO branch (B_ID, B_NAME, M_ID, R_id) VALUES (4, 'BALA', 4, 4);
+INSERT INTO branch (B_ID, B_NAME, M_ID, R_id) VALUES (5, 'SALA', 5, 5);
+
+INSERT INTO customer (cu_id, cu_name, cu_phone, i_id, R_id) VALUES (1, 'TAMIM', 01717654321, 5, 5);
+INSERT INTO customer (cu_id, cu_name, cu_phone, i_id, R_id) VALUES (2, 'Rimon', 01917672321, 4, 1);  
+INSERT INTO customer (cu_id, cu_name, cu_phone, i_id, R_id) VALUES (3, 'Alex', 01665432111, 1, 2);
+INSERT INTO customer (cu_id, cu_name, cu_phone, i_id, R_id) VALUES (4, 'Nisha', 01817664389, 3, 3);
+INSERT INTO customer (cu_id, cu_name, cu_phone, i_id, R_id) VALUES (5, 'Partho', 01517654333, 2, 4);
+
+
+CREATE SEQUENCE branch_seq
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 13
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE SEQUENCE food_seq
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 22
+  INCREMENT BY 1
+  CACHE 20;
+-------------------------
+create view manager_view as select m1.m_id, m1.m_name, r1.r_id, r1.r_name from manager m1, restaurant r1 where m1.r_id =r1.r_id
+------
+create view AVG as select AVG(SAL) as SALARY from waiter;
+-----
+create view newAmount as select i_id, i_name, (i_amount-(i_amount*0.45)) as New_Amount from food_item;
+-----
+create view shop_info as select r_name,r_address,r_phone from restaurant;
+--------------------
+create or replace trigger food_quantity_trigger 
+before insert or update of i_quantity on food_item 
+for each row 
+begin 
+if :new.i_quantity <0 
+then raise_application_error(-20201,'Food Quantity can’t be negative'); 
+end if;
+end;
+---------------
+create or replace trigger loc_shop_trigger 
+before insert or update of r_address on restaurant
+for each row 
+begin 
+if :new.r_address = 'Mirpur' 
+then raise_application_error(-20201,'This location is not listed for our outlet'); 
+end if;
+end;
+-------------------
+create or replace trigger regular_hour_trigger
+before insert or update or delete on food_item
+begin
+if to_char(sysdate,'HH24') between '11' and '22' then
+raise_application_error(-20201, 'Sorry try again later in office hour');
+end if;
+end;
+-------------
+create table  item_log(database_user VARCHAR2(50), 
+operation_name VARCHAR2(50) ,
+operation_date VARCHAR2(50) );
+----------
+create or replace trigger item_table_operation
+after insert or update or delete on food_item
+declare
+o_name varchar(30);
+begin
+if inserting then
+o_name := 'insert operation successful';
+elsif updating then
+o_name := 'update operation successful';
+elsif deleting then
+o_name := 'delete operation successful';
+end if;
+insert into item_log VALUES(user, o_name, sysdate);
+end;
+
+---------------------------------------------------------------------------------------
+create package final_project as
+procedure manager_sal_update(mid manager.m_id%type, msal manager.sal%type);
+procedure customer_delete(cuid customer.cu_id%type);
+procedure RESTAURANT_insertion(rid RESTAURANT.r_id%type, rname RESTAURANT.r_name%type, rphone RESTAURANT.r_phone%type, radd RESTAURANT.r_address%type, rzip RESTAURANT.r_zipcode%type);
+END final_project;
+
+CREATE OR REPLACE PACKAGE BODY final_project AS
+procedure manager_sal_update(mid manager.m_id%type, msal manager.sal%type) IS
+BEGIN
+update manager set sal = (sal+msal) where m_id = mid;
+END manager_sal_update;
+
+procedure customer_delete(cuid customer.cu_id%type) IS
+BEGIN
+delete customer where cu_id = cuid;
+END customer_delete;
+procedure RESTAURANT_insertion(rid RESTAURANT.r_id%type, rname RESTAURANT.r_name%type, rphone RESTAURANT.r_phone%type, radd RESTAURANT.r_address%type, rzip RESTAURANT.r_zipcode%type) IS
+BEGIN
+insert into RESTAURANT values(rid,rname,rphone,radd,rzip);
+END RESTAURANT_insertion;
+END final_project;
+
+
+create function manSal(mid in manager.m_id%type)
+return manager.sal%type
+IS
+msal manager.sal%type;
+BEGIN
+select sal into msal from manager where m_id = mid;
+return msal;
+END;
+
+create function waiterSal(wid in waiter.w_id%type)
+return waiter.sal%type
+IS
+sal waiter.sal%type;
+BEGIN
+select sal into sal from waiter where w_id = wid;
+return sal;
+END;
+
+---------------------------------------------------------------------------------------
+SELECT * FROM UINFORMATION
+SELECT * FROM RESTAURANT
+SELECT * FROM MANAGER
+SELECT * FROM CUSTOMER
+SELECT * FROM BRANCH
+SELECT * FROM CASHIER
+SELECT * FROM WAITER
+SELECT * FROM FOOD_ITEM
